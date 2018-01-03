@@ -273,6 +273,10 @@ impl GlyphCache {
             .expect("metrics load since font is loaded at glyph cache creation")
     }
 
+	pub fn true_average_width(&self) -> f64 {
+        (self.cache.values().fold(0., |sum, g| sum + g.width) / self.cache.len() as f32 + 2.) as f64
+    }
+
     pub fn get<'a, L>(&'a mut self, glyph_key: &GlyphKey, loader: &mut L) -> &'a Glyph
         where L: LoadGlyph
     {

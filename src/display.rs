@@ -239,7 +239,7 @@ impl Display {
         // font metrics should be computed before creating the window in the first
         // place so that a resize is not needed.
         let metrics = glyph_cache.font_metrics();
-        let cell_width = (metrics.average_advance + font.offset().x as f64) as u32;
+        let cell_width = (glyph_cache.true_average_width() + font.offset().x as f64) as u32;
         let cell_height = (metrics.line_height + font.offset().y as f64) as u32;
 
         Ok((glyph_cache, cell_width as f32, cell_height as f32))
